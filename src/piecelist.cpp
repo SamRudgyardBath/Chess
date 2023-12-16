@@ -16,3 +16,11 @@ void PieceList::Draw() {
         DrawTextureEx(pieces[i].texture, position, 0., (float)drawScale, WHITE);
     }
 }
+
+int PieceList::DeterminePiece(int bitValue) {
+    return bitValue & PIECE;
+}
+
+bool PieceList::IsPieceBlack(int bitValue) {
+    return (bitValue & PIECE_BLACK);
+}

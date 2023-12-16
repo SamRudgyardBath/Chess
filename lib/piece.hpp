@@ -21,26 +21,11 @@ class Piece {
     public:
         bool isBlack;
         int position;
+        int bitValue;
         Texture2D texture;
 
         // Constructor
-        Piece(int position, int bitfield);
-
-        /*  Method: DeterminePiece
-            Determines the type of piece at the provided index on the board.
-
-            @param squareIndex index of the square of interest on the chess board.
-            @return the piece's corresponding bit-field integer. 
-        */
-        int DeterminePiece(int piece);
-
-        /*  Method: IsPieceBlack
-            Determines whether a piece is black or white.
-
-            @param squareIndex index of the square of interest on the chess board.
-            @return true if piece is black, false if piece is white.
-        */
-        bool IsPieceBlack(int piece);
+        Piece(int position, int bitValue);
 };
 
 #endif

@@ -1,9 +1,14 @@
 #include <piece.hpp>
 
-Piece::Piece(int position, int bitfield) {
+Piece::Piece(int position, int bitValue) {
     this->position = position;
-    this->isBlack = IsPieceBlack(bitfield); 
-    int piece = DeterminePiece(bitfield);
+    this->bitValue = bitValue;
+    /*  The following is a bit clunky, as we should really be resuing the Piecelist::DeterminePiece()
+    *   and Piecelist::IsPieceBlack() functions... so,
+    *   TODO: Reformat code so that can reuse functions for these!
+    */
+    this->isBlack = bitValue & PIECE_BLACK; 
+    int piece = bitValue & PIECE; 
 
     Image image;
     if (isBlack) {
@@ -51,10 +56,3 @@ Piece::Piece(int position, int bitfield) {
 }
 
        
-int Piece::DeterminePiece(int piece) {
-    return piece & PIECE;
-}
-
-bool Piece::IsPieceBlack(int piece) {
-    return (piece & PIECE_BLACK);
-}
