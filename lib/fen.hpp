@@ -1,11 +1,11 @@
 #ifndef FEN_HPP
 #define FEN_HPP
 
+
 #include <string>
 #include <map>
-#include <iterator>
+#include <iostream>
 #include <piece.hpp>
-#include <raylib.hpp>
 
 class Fen {
     public:
@@ -18,6 +18,8 @@ class Fen {
             {'r', ROOK},
             {'q', QUEEN}
         };
+
+        int* LoadFromFen(std::string fen);
 };
 
 #endif

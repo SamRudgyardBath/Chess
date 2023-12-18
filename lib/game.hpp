@@ -3,6 +3,7 @@
 
 #include <chessboard.hpp>
 #include <piecelist.hpp>
+#include <fen.hpp>
 
 class Game {
     public:

@@ -1,10 +1,12 @@
 #include <game.hpp>
 
 Game::Game() {
-    // The piece at a square is represented using a bit-field
-    board.squares[0] = PIECE_WHITE | BISHOP;
-    board.squares[10] = PIECE_BLACK | QUEEN;
-    board.squares[63] = PIECE_WHITE | KING;
+    Fen fen;
+    int *pInitialSetup;
+    pInitialSetup = fen.LoadFromFen(fen.startFen);
+    for (int i = 0; i < 64; i++) {
+        board.squares[i] = pInitialSetup[i];
+    }
 
     Update();
 
