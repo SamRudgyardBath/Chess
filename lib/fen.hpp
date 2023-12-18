@@ -6,6 +6,7 @@
 #include <map>
 #include <iostream>
 #include <piece.hpp>
+#include <loadedpositioninfo.hpp>
 
 class Fen {
     public:
@@ -19,7 +20,7 @@ class Fen {
             {'q', QUEEN}
         };
 
-        int* LoadFromFen(std::string fen);
+        LoadedPositionInfo LoadFromFen(std::string fen);
 };
 
 #endif

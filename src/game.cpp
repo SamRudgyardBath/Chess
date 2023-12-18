@@ -2,10 +2,9 @@
 
 Game::Game() {
     Fen fen;
-    int *pInitialSetup;
-    pInitialSetup = fen.LoadFromFen(fen.startFen);
+    LoadedPositionInfo loadedInfo = fen.LoadFromFen(fen.startFen);
     for (int i = 0; i < 64; i++) {
-        board.squares[i] = pInitialSetup[i];
+        board.squares[i] = loadedInfo.squares[i];
     }
 
     Update();

@@ -1,6 +1,8 @@
 #include <fen.hpp>
 
-int* Fen::LoadFromFen(std::string fen) {
+LoadedPositionInfo Fen::LoadFromFen(std::string fen) {
+    static LoadedPositionInfo loadedPositionInfo;
+
     std::string delimiter = " ";
 
     // Term 1 - Positions of pieces
@@ -33,11 +35,15 @@ int* Fen::LoadFromFen(std::string fen) {
         }
     }
 
+    for (int i = 0; i < 64; i++) {
+        loadedPositionInfo.squares[i] = squares[i];
+    }
+
     // Term 2 - Who's turn is it to move?
     fen.erase(0, boardComponent.length() + delimiter.length());
     std::string colourToMoveComponent = fen.substr(0, fen.find(delimiter));
     std::string whiteMove = "w";
-    bool whiteToMove = (colourToMoveComponent == whiteMove);
+    loadedPositionInfo.whiteToMove = (colourToMoveComponent == whiteMove);
 
     // Turn 3 - Castling rights
     fen.erase(0, colourToMoveComponent.length() + delimiter.length());
@@ -48,11 +54,12 @@ int* Fen::LoadFromFen(std::string fen) {
     else {
         castlingRightsComponent = fen.substr(0, fen.find(delimiter));
     }
-    static bool canCastle[4] = {false};
-    canCastle[0] = castlingRightsComponent.find("K") != std::string::npos;
-    canCastle[1] = castlingRightsComponent.find("Q") != std::string::npos;
-    canCastle[2] = castlingRightsComponent.find("k") != std::string::npos;
-    canCastle[3] = castlingRightsComponent.find("q") != std::string::npos;
+    loadedPositionInfo.whiteCastleKingSide = castlingRightsComponent.find("K") != std::string::npos;
+    loadedPositionInfo.whiteCastleQueenSide = castlingRightsComponent.find("Q") != std::string::npos;
+    loadedPositionInfo.blackCastleKingSide = castlingRightsComponent.find("k") != std::string::npos;
+    loadedPositionInfo.blackCastleQueenSide = castlingRightsComponent.find("q") != std::string::npos;
 
-    return squares;
+    // TODO: Need to sort out hte "- 0 1" parts, plus how to return everything nicely!
+
+    return loadedPositionInfo;
 }
