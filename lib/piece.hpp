@@ -2,6 +2,8 @@
 #define PIECE_HPP
 
 #include <raylib.hpp>
+#include <raymath.hpp>
+#include <settings.hpp>
 
 /*  The values used here were found at: https://opensource.com/article/21/8/binary-bit-fields-masks,
 *   alongside info for determining the piece type and colour from the resultant binary number.
@@ -19,10 +21,13 @@
 
 class Piece {
     public:
+        int drawScale = 3;
         bool isBlack;
         int position;
         int bitValue;
         Texture2D texture;
+        bool isSelected;
+        Rectangle collider;
 
         // Constructor
         Piece(int position, int bitValue);

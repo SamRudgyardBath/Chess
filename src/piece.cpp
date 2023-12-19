@@ -53,6 +53,15 @@ Piece::Piece(int position, int bitValue) {
     }
     this->texture = LoadTextureFromImage(image);
     UnloadImage(image);
+
+    this->isSelected = false;
+    int file = position % 8;
+    int rank = trunc(position/8);
+    Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
+    Vector2 centering = Vector2 {(float)(cellSize - this->drawScale * this->texture.width)/2.f, 0};
+    Vector2 xy = Vector2Add(topLeftCorner, centering);
+    Rectangle collisionBox = Rectangle {(float)xy.x, (float)xy.y, (float)this->texture.width * this->drawScale, (float)this->texture.height * this->drawScale};
+    this->collider = collisionBox;
 }
 
        

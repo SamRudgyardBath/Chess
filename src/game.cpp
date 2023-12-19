@@ -17,13 +17,22 @@ Game::~Game() {
 }
 
 void Game::Update() {
+    GeneratePieces();
+    SelectPiece();
+}
+
+void Game::Draw() {
+    board.Draw();
+    pieceList.Draw();
+}
+
+void Game::GeneratePieces() {
     for (int squareNo = 0; squareNo < 64; squareNo++) {
         int bitValue = board.squares[squareNo];
         if (bitValue != EMPTY) {
             // Check to see if the piece has already been created!
             bool generatePiece = true;
-            for (int pieceIndex = 0; pieceIndex < pieceList.pieces.size(); pieceIndex++) {
-                Piece piece = pieceList.pieces[pieceIndex];
+            for (Piece& piece : pieceList.pieces) {
                 if (piece.position == squareNo) {
                     // There is SOME piece here
                     if (pieceList.DeterminePiece(bitValue) == pieceList.DeterminePiece(piece.bitValue)) {
@@ -45,7 +54,17 @@ void Game::Update() {
     }
 }
 
-void Game::Draw() {
-    board.Draw();
-    pieceList.Draw();
+void Game::SelectPiece() {
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        for (Piece& piece : pieceList.pieces) {
+            // The & above gets a reference to the original, instead of creating a copy!
+            if (CheckCollisionPointRec(GetMousePosition(), piece.collider)) {
+                if (!piece.isSelected) {
+                    bool *pIsSelected = &piece.isSelected;
+                    *pIsSelected = true;
+                }
+                
+            }
+        }
+    }
 }
