@@ -32,6 +32,8 @@ class Piece {
 
         // Constructor
         Piece(int squareNumber, int bitValue);
+
+        void Draw();
 };
 
 #endif

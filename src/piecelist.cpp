@@ -8,24 +8,7 @@ PieceList::~PieceList() {
 
 void PieceList::Draw() {
     for (Piece& piece : pieces) {
-        if (!piece.isSelected) {
-            int file = piece.squareNumber % 8;
-            int rank = trunc(piece.squareNumber/8);
-            Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
-            Vector2 centering = Vector2 {(float)(cellSize - piece.drawScale * piece.texture.width)/2.f, 0};
-            Vector2 position = Vector2Add(topLeftCorner, centering);
-            DrawTextureEx(piece.texture, position, 0., (float)piece.drawScale, WHITE);
-        }
-        if (piece.isSelected) {
-            Vector2 mousePosition = Vector2Subtract(GetMousePosition(), Vector2 {(float)(piece.drawScale * piece.texture.width)/2.f, (float)(piece.drawScale * piece.texture.height)/2.f});
-            DrawTextureEx(piece.texture, mousePosition, 0., (float)piece.drawScale, WHITE);
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                int file = ((mousePosition.x - offset) / cellSize);
-                int rank = (((2*offset + 8*cellSize) - mousePosition.y) / cellSize) - 1;
-                piece.position = 8 * rank + file;
-                piece.isSelected = false;
-            }
-        }
+        piece.Draw();
     }
 }
 
