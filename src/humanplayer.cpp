@@ -12,6 +12,7 @@ void HumanPlayer::CheckForPieceSelection() {
                 if (!piece.isSelected) {
                     bool *pIsSelected = &piece.isSelected;
                     *pIsSelected = true;
+                    hasPieceSelected = true;
                 }
             }
         }

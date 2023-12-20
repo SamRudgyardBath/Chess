@@ -6,6 +6,8 @@
 
 class HumanPlayer {
     public:
+        bool hasPieceSelected = false;
+
         // Constructor
         HumanPlayer(Chessboard& refChessboard, PieceList& refPieceList) : board(refChessboard),  pieceList(refPieceList) {};
 
