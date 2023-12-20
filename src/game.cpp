@@ -18,7 +18,7 @@ Game::~Game() {
 
 void Game::Update() {
     GeneratePieces();
-    SelectPiece();
+    player.Update();
 }
 
 void Game::Draw() {
@@ -49,21 +49,6 @@ void Game::GeneratePieces() {
             if (generatePiece) {
                 Piece piece = Piece(squareNo, board.squares[squareNo]);
                 pieceList.pieces.push_back(piece);
-            }
-        }
-    }
-}
-
-void Game::SelectPiece() {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-        for (Piece& piece : pieceList.pieces) {
-            // The & above gets a reference to the original, instead of creating a copy!
-            if (CheckCollisionPointRec(GetMousePosition(), piece.collider)) {
-                if (!piece.isSelected) {
-                    bool *pIsSelected = &piece.isSelected;
-                    *pIsSelected = true;
-                }
-                
             }
         }
     }
