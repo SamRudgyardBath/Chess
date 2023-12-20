@@ -11,6 +11,8 @@ class HumanPlayer {
 
         void Update();
 
+        void CheckForPieceSelection();
+
     protected:
         Chessboard& board;
         PieceList& pieceList;
