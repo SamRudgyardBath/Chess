@@ -50,12 +50,7 @@ void HumanPlayer::PlacePiece(Piece& piece) {
 }
 
 void HumanPlayer::CancelPlacement(Piece& piece) {
-    int file = piece.squareNumber % 8;
-    int rank = trunc(piece.squareNumber/8);
-    Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
-    Vector2 centering = Vector2 {(float)(cellSize - piece.drawScale * piece.texture.width)/2.f, 0};
-
-    piece.position = Vector2Add(topLeftCorner, centering);
+    piece.position = piece.SquareNumberToPosition(piece.squareNumber);
     piece.isSelected = false;
     hasPieceSelected = false;
 }

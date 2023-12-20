@@ -34,6 +34,8 @@ class Piece {
         Piece(int squareNumber, int bitValue);
 
         void Draw();
+
+        Vector2 SquareNumberToPosition(int squareNumber);
 };
 
 #endif
