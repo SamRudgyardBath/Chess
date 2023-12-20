@@ -9,8 +9,8 @@ PieceList::~PieceList() {
 void PieceList::Draw() {
     for (Piece& piece : pieces) {
         if (!piece.isSelected) {
-            int file = piece.position % 8;
-            int rank = trunc(piece.position/8);
+            int file = piece.squareNumber % 8;
+            int rank = trunc(piece.squareNumber/8);
             Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
             Vector2 centering = Vector2 {(float)(cellSize - piece.drawScale * piece.texture.width)/2.f, 0};
             Vector2 position = Vector2Add(topLeftCorner, centering);
@@ -36,7 +36,7 @@ void PieceList::GeneratePieces(Chessboard& board) {
             // Check to see if the piece has already been created!
             bool generatePiece = true;
             for (Piece& piece : pieces) {
-                if (piece.position == squareNo) {
+                if (piece.squareNumber == squareNo) {
                     // There is SOME piece here
                     if (DeterminePiece(bitValue) == DeterminePiece(piece.bitValue)) {
                         // The pieces are the same type..

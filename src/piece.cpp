@@ -1,7 +1,7 @@
 #include <piece.hpp>
 
 Piece::Piece(int position, int bitValue) {
-    this->position = position;
+    this->squareNumber = position;
     this->bitValue = bitValue;
     /*  The following is a bit clunky, as we should really be resuing the Piecelist::DeterminePiece()
     *   and Piecelist::IsPieceBlack() functions... so,

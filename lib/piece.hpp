@@ -23,14 +23,15 @@ class Piece {
     public:
         int drawScale = 3;
         bool isBlack;
-        int position;
+        int squareNumber;
+        Vector2 position;
         int bitValue;
         Texture2D texture;
         bool isSelected;
         Rectangle collider;
 
         // Constructor
-        Piece(int position, int bitValue);
+        Piece(int squareNumber, int bitValue);
 };
 
 #endif
