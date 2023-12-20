@@ -1,7 +1,7 @@
 #include <piece.hpp>
 
-Piece::Piece(int position, int bitValue) {
-    this->squareNumber = position;
+Piece::Piece(int squareNumber, int bitValue) {
+    this->squareNumber = squareNumber;
     this->bitValue = bitValue;
     /*  The following is a bit clunky, as we should really be resuing the Piecelist::DeterminePiece()
     *   and Piecelist::IsPieceBlack() functions... so,
@@ -56,8 +56,8 @@ Piece::Piece(int position, int bitValue) {
 
     this->isSelected = false;
 
-    int file = position % 8;
-    int rank = trunc(position/8);
+    int file = squareNumber % 8;
+    int rank = trunc(squareNumber/8);
     Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
     Vector2 centering = Vector2 {(float)(cellSize - drawScale * texture.width)/2.f, 0};
     Vector2 xy = Vector2Add(topLeftCorner, centering);
