@@ -23,7 +23,6 @@ void PieceList::Draw() {
                 int file = ((mousePosition.x - offset) / cellSize);
                 int rank = (((2*offset + 8*cellSize) - mousePosition.y) / cellSize) - 1;
                 piece.position = 8 * rank + file;
-                std::cout << "file: " << file << "\trank: " << rank << "\t position = " << piece.position << endl;
                 piece.isSelected = false;
             }
         }
