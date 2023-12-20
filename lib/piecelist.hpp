@@ -6,6 +6,7 @@
 #include <piece.hpp>
 #include <raymath.hpp>
 #include <settings.hpp>
+#include <chessboard.hpp>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ class PieceList {
         ~PieceList();
 
         void Draw();
+
+        void GeneratePieces(Chessboard& board);
 
         /*  Method: DeterminePiece
             Determines the type of piece at the provided index on the board.
