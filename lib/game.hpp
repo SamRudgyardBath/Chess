@@ -21,10 +21,6 @@ class Game {
         void Update();
 
         void Draw();
-
-        void GeneratePieces();
-
-        void SelectPiece();
 };
 
 #endif
