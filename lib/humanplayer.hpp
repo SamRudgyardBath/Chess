@@ -14,6 +14,12 @@ class HumanPlayer {
         void Update();
 
         void CheckForPieceSelection();
+        
+        void DragPiece();
+
+        void PlacePiece(Piece& piece);
+
+        void CancelPlacement(Piece& piece);
 
     protected:
         Chessboard& board;

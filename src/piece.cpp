@@ -69,10 +69,5 @@ Piece::Piece(int squareNumber, int bitValue) {
 }
 
 void Piece::Draw() {
-    if (!isSelected) {
-        DrawTextureEx(texture, position, 0., (float)drawScale, WHITE);
-    }
-    if (isSelected) {
-        
-    }
+    DrawTextureEx(texture, position, 0., (float)drawScale, WHITE);
 }
