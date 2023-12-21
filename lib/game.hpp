@@ -11,6 +11,7 @@ class Game {
         Chessboard board = Chessboard(squareDark, squareLight);
         PieceList pieceList;
         HumanPlayer player = HumanPlayer(board, pieceList);
+        int squares[64] = {0};
 
         // Constructor
         Game();

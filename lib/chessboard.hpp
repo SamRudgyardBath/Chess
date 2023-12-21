@@ -9,8 +9,6 @@ class Chessboard {
         Color darkColour;
         Color lightColour;
         Color boardColours[64];
-
-        int squares[64] = {0};
     
         // Constructor
         Chessboard(Color darkColour, Color lightColour);

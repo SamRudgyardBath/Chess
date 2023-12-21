@@ -4,7 +4,7 @@ Game::Game() {
     Fen fen;
     LoadedPositionInfo loadedInfo = fen.LoadFromFen(fen.startFen);
     for (int i = 0; i < 64; i++) {
-        board.squares[i] = loadedInfo.squares[i];
+        squares[i] = loadedInfo.squares[i];
     }
 
     Update();
@@ -17,8 +17,21 @@ Game::~Game() {
 }
 
 void Game::Update() {
-    pieceList.GeneratePieces(board);
+    pieceList.GeneratePieces(squares);
     player.Update();
+
+    for (int i = 0; i < 64; i++) {
+        bool pieceOnThisSquare = false;
+        for (Piece piece : pieceList.pieces) {
+            if (i == piece.squareNumber) {
+                pieceOnThisSquare = true;
+                squares[i] = piece.bitValue;
+            }
+        }
+        if (!pieceOnThisSquare) {
+            squares[i] = EMPTY;
+        }
+    }
 }
 
 void Game::Draw() {

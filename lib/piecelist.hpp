@@ -20,7 +20,7 @@ class PieceList {
 
         void Draw();
 
-        void GeneratePieces(Chessboard& board);
+        void GeneratePieces(int squares[64]);
 
         /*  Method: DeterminePiece
             Determines the type of piece at the provided index on the board.

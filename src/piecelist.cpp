@@ -12,9 +12,9 @@ void PieceList::Draw() {
     }
 }
 
-void PieceList::GeneratePieces(Chessboard& board) {
+void PieceList::GeneratePieces(int squares[64]) {
     for (int squareNo = 0; squareNo < 64; squareNo++) {
-        int bitValue = board.squares[squareNo];
+        int bitValue = squares[squareNo];
         if (bitValue != EMPTY) {
             // Check to see if the piece has already been created!
             bool generatePiece = true;
@@ -32,7 +32,7 @@ void PieceList::GeneratePieces(Chessboard& board) {
                 }
             }
             if (generatePiece) {
-                Piece piece = Piece(squareNo, board.squares[squareNo]);
+                Piece piece = Piece(squareNo, squares[squareNo]);
                 pieces.push_back(piece);
             }
         }
