@@ -1,20 +1,21 @@
 #include <humanplayer.hpp>
 
 void HumanPlayer::Update() {
-    CheckForPieceSelection();
+    if (!hasPieceSelected) {
+        CheckForPieceSelection();
+    }
     if (hasPieceSelected) {
         DragPiece();
     }
 }
 
 void HumanPlayer::CheckForPieceSelection() {
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         for (Piece& piece : pieceList.pieces) {
             // The & above gets a reference to the original, instead of creating a copy!
             if (CheckCollisionPointRec(GetMousePosition(), piece.collider)) {
                 if (!piece.isSelected) {
-                    bool *pIsSelected = &piece.isSelected;
-                    *pIsSelected = true;
+                    piece.isSelected = true;
                     hasPieceSelected = true;
                 }
             }
@@ -27,10 +28,10 @@ void HumanPlayer::DragPiece() {
         if (piece.isSelected) {
             Vector2 mousePosition = Vector2Subtract(GetMousePosition(), Vector2 {(float)(piece.drawScale * piece.texture.width)/2.f, (float)(piece.drawScale * piece.texture.height)/2.f});
             piece.position = mousePosition;
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
                 PlacePiece(piece);
             }
-            if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+            if (IsMouseButtonReleased(MOUSE_RIGHT_BUTTON)) {
                 CancelPlacement(piece);
             }
         }
@@ -41,10 +42,11 @@ void HumanPlayer::PlacePiece(Piece& piece) {
     int file = ((piece.position.x - offset) / cellSize);
     int rank = (((2*offset + 8*cellSize) - piece.position.y) / cellSize) - 1;
     piece.squareNumber = 8 * rank + file;
-    Vector2 topLeftCorner = Vector2 {(float)offset + file*cellSize, (float)offset + (7 - rank)*cellSize};
-    Vector2 centering = Vector2 {(float)(cellSize - piece.drawScale * piece.texture.width)/2.f, 0};
+    piece.position = piece.SquareNumberToPosition(piece.squareNumber);
 
-    piece.position = Vector2Add(topLeftCorner, centering);
+    // Update collision box
+    Rectangle newCollisionBox = Rectangle {(float)piece.position.x, (float)piece.position.y, (float)piece.texture.width * piece.drawScale, (float)piece.texture.height * piece.drawScale};
+    piece.collider = newCollisionBox;
     piece.isSelected = false;
     hasPieceSelected = false;
 }
